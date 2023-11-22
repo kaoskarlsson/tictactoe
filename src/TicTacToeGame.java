@@ -119,6 +119,9 @@ TicTacToeGame(){
             xWins(6,7,8);
         }
 
+
+
+
         if(
                 (buttons[0].getText()=="X") &&
                         (buttons[3].getText()=="X") &&
@@ -240,14 +243,14 @@ TicTacToeGame(){
         textfield.setText("O wins");
     }
 
+
+
+
     private void checkTie() {
         boolean tie = true;
-        JButton[] buttons = new JButton[9];
-        JTextField textfield = new JTextField();
-        
+
         // Kolla om det finns några tomma celler kvar
         JButton[] buttons = new JButton[0];
-
         for (JButton button : buttons) {
             if (button.getText().isEmpty()) {
                 tie = false;
