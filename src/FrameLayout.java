@@ -81,6 +81,25 @@ public class FrameLayout implements ActionListener {
 
                 firstTurn();
             }
+
+            private void firstTurn() {
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if(random.nextInt(2)==0) {
+                    player1_turn=true;
+                    textfield.setText("X turn");
+                }
+                else {
+                    player1_turn=false;
+                    textfield.setText("O turn");
+                }
+                return;
+            }
         });
         twoplayer_button.addActionListener(new ActionListener() {
             @Override
@@ -111,7 +130,7 @@ public class FrameLayout implements ActionListener {
                 }
             }
 
-            public void firstTurn() {
+           /* public void firstTurn() {
 
                 try {
                     Thread.sleep(3000);
@@ -128,7 +147,7 @@ public class FrameLayout implements ActionListener {
                     textfield.setText("O turn");
                 }
                 return;
-            }
+            }*/
 
             //System.out.println("Du tryckte på two player knappen");
 
