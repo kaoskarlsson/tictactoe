@@ -68,7 +68,7 @@ TicTacToeGame(){
                         buttons[i].setText("X");
                         player1_turn=false;
                         textfield.setText("O turn");
-                        checkWin();
+                        check();
                     }
                 }
                 else {
@@ -77,7 +77,7 @@ TicTacToeGame(){
                         buttons[i].setText("O");
                         player1_turn=true;
                         textfield.setText("X turn");
-                        checkWin();
+                        check();
                     }
                 }
             }
@@ -241,7 +241,7 @@ TicTacToeGame(){
         }
         textfield.setText("O wins");
     }
-}
+
 
 
 
@@ -270,10 +270,9 @@ TicTacToeGame(){
         }
     }
 }
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(TicTacToeGame::new);
-    }
-
-    public void initializeGame() {
+   /*public static void main(String[] args) {
+       SwingUtilities.invokeLater(TicTacToeGame::new);
+    }*/
+ /*   public void initializeGame() {
     }
 }
