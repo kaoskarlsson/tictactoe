@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 public class FrameLayout implements ActionListener {
+
+    Random random = new Random();
     JFrame frame = new JFrame() ;
     JTextField textfield = new JTextField();
     JLabel label = new JLabel();
@@ -15,12 +17,14 @@ public class FrameLayout implements ActionListener {
     JButton twoplayer_button = new JButton();
     JButton reset_button = new JButton();
     JButton[] buttons = new JButton[9];
+    boolean player1_turn;
+
 
     FrameLayout(){
-        frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(700,700);
         frame.setLayout(new BorderLayout());
+        frame.getContentPane().setBackground(new Color(50,50,100));
         frame.setVisible(true);
 
         textfield.setBackground(Color.BLACK);
@@ -33,7 +37,7 @@ public class FrameLayout implements ActionListener {
         title_panel.setLayout(new BorderLayout());
         title_panel.setBounds(0,0,700,90);
 
-        //Southpanel here , will add one player and two player button and reset button
+        button_panel.setBackground(new Color(150,150,150));
         oneplayer_button.setPreferredSize(new Dimension(150,100));
         oneplayer_button.setFont(new Font("Monospaced",Font.BOLD,15));
         oneplayer_button.setText("1 Player");
@@ -63,8 +67,6 @@ public class FrameLayout implements ActionListener {
             button_panel.add(buttons[i]);
             buttons[i].setFont(new Font("Monospaced", Font.BOLD,100));
             buttons[i].addActionListener(this);
-
-
 
         }
 
@@ -102,6 +104,11 @@ public class FrameLayout implements ActionListener {
 
 
     }
+
+    private LayoutManager newGridLayout(int i, int i1) {
+        return null;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e){
         System.out.println("Du tryckte på en knapp! hihi");
