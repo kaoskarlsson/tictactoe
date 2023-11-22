@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//HEEJEEJEJEJ
 public class FrameLayout implements ActionListener {
 
     Random random = new Random();
