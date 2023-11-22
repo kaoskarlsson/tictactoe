@@ -89,5 +89,6 @@ public class TicTacToeGame implements ActionListener {
     }
 
     public void initializeGame() {
+        // Här kan du lägga till logiken för att starta ett nytt spel
     }
 }
