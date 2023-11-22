@@ -55,6 +55,14 @@ TicTacToeGame(){
  }
 
     private void firstTurn() {
+        if(random.nextInt(2)==0) {
+            player1_turn=true;
+            textfield.setText("X turn");
+        }
+        else {
+            player1_turn=false;
+            textfield.setText("O turn");
+        }
     }
 
     @Override
@@ -84,14 +92,7 @@ TicTacToeGame(){
         }
     //Infoga Try catch här? //
 
-    if(random.nextInt(2)==0) {
-        player1_turn=true;
-        textfield.setText("X turn");
-    }
-		else {
-        player1_turn=false;
-        textfield.setText("O turn");
-    }
+
 }
 
     public void check() {
@@ -249,7 +250,7 @@ TicTacToeGame(){
         boolean tie = true;
 
         // Kolla om det finns några tomma celler kvar
-        JButton[] buttons;
+        JButton[] buttons = new JButton[0];
         for (JButton button : buttons) {
             if (button.getText().isEmpty()) {
                 tie = false;
