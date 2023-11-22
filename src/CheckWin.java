@@ -2,6 +2,11 @@
 
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.Objects;
+import java.util.Random;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CheckWin {
     private boolean checkWin(String symbol) {

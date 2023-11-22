@@ -155,9 +155,9 @@ public class FrameLayout implements ActionListener {
 
             //}
         //}
-    public void check() {
+    /*public void check() {
         //check X win conditions
-        if(
+       if(
                 (buttons[0].getText()=="X") &&
                         (buttons[1].getText()=="X") &&
                         (buttons[2].getText()=="X")
