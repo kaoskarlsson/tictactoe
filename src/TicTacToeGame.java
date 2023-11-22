@@ -2,53 +2,71 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class TicTacToeGame implements ActionListener {
 
-    private JFrame frame = new JFrame();
-    private JTextField textField = new JTextField();
-    private JButton[] buttons = new JButton[9];
-    private boolean playerXTurn = true;
+    Random random = new Random();
+    JFrame frame = new JFrame() ;
+    JTextField textfield = new JTextField();
+    JLabel label = new JLabel();
+    JPanel title_panel = new JPanel();
+    JPanel button_panel = new JPanel();
+    JPanel south_panel = new JPanel();
+    JButton oneplayer_button = new JButton();
+    JButton twoplayer_button = new JButton();
+    JButton reset_button = new JButton();
+    JButton[] buttons = new JButton[9];
+    boolean player1_turn;
 
-    public TicTacToeGame() {
-        initializeGUI();
-    }
-
-    private void initializeGUI() {
+TicTacToeGame(){
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
+        frame.getContentPane().setBackground(new Color(50,50,50));
         frame.setLayout(new BorderLayout());
-
-        textField.setBackground(Color.BLACK);
-        textField.setForeground(Color.CYAN);
-        textField.setFont(new Font("Monospaced", Font.PLAIN, 20));
-        textField.setHorizontalAlignment(JLabel.CENTER);
-        textField.setText("Tic-Tac-Toe");
-        textField.setOpaque(true);
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(3, 3));
-
-        for (int i = 0; i < 9; i++) {
-            buttons[i] = new JButton();
-            buttons[i].setFont(new Font("Monospaced", Font.BOLD, 30));
-            buttons[i].addActionListener(this);
-            buttonPanel.add(buttons[i]);
-        }
-
-        frame.add(textField, BorderLayout.NORTH);
-        frame.add(buttonPanel, BorderLayout.CENTER);
-
         frame.setVisible(true);
+
+        textfield.setBackground(Color.BLACK);
+        textfield.setForeground(Color.CYAN);
+        textfield.setFont(new Font("Monospaced", Font.PLAIN, 20));
+        textfield.setHorizontalAlignment(JLabel.CENTER);
+        textfield.setText("Tic-Tac-Toe");
+        textfield.setOpaque(true);
+
+            title_panel.setLayout(new BorderLayout());
+            title_panel.setBounds(0,0,800,100);
+
+     button_panel.setLayout(new GridLayout(3,3));
+     button_panel.setBackground(new Color(150,150,150));
+
+     for(int i=0;i<9;i++) {
+         buttons[i] = new JButton();
+         button_panel.add(buttons[i]);
+         buttons[i].setFont(new Font("MV Boli",Font.BOLD,120));
+         buttons[i].setFocusable(false);
+         buttons[i].addActionListener(this);
+     }
+
+     title_panel.add(textfield);
+     frame.add(title_panel,BorderLayout.NORTH);
+     frame.add(button_panel);
+
+     firstTurn();
+ }
+
+    private void firstTurn() {
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         JButton clickedButton = (JButton) e.getSource();
 
         for (int i = 0; i < 9; i++) {
             if (clickedButton.equals(buttons[i]) && clickedButton.getText().isEmpty()) {
                 makeMove(clickedButton);
+                TextField textField;
                 if (checkWin("X")) {
                     textField.setText("Player X wins!");
                 } else if (checkWin("O")) {
@@ -86,5 +104,8 @@ public class TicTacToeGame implements ActionListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(TicTacToeGame::new);
+    }
+
+    public void initializeGame() {
     }
 }

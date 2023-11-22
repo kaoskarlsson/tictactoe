@@ -1,3 +1,4 @@
+/*
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -66,6 +67,7 @@ public class CheckWin {
         if (clickedButton.getText().isEmpty()) {
             makeMove(clickedButton);
 
+            Label textfield;
             if (checkWin("X")) {
                 textfield.setText("X wins!");
             } else if (checkWin("O")) {
@@ -92,4 +94,4 @@ public class CheckWin {
             textfield.setText("It's a tie!");
         }
     }
-}
+}*/
