@@ -127,12 +127,13 @@ public class FrameLayout implements ActionListener {
                     player1_turn=false;
                     textfield.setText("O turn");
                 }
+                return;
             }
 
-            System.out.println("Du tryckte på two player knappen");
+            //System.out.println("Du tryckte på two player knappen");
 
-            }
-        };
+            //}
+        //}
     public void check() {
         //check X win conditions
         if(
@@ -275,7 +276,7 @@ public class FrameLayout implements ActionListener {
         }
         textfield.setText("O wins");
     }
-}
+},
 
 
         reset_button.addActionListener(new ActionListener() {
@@ -286,7 +287,7 @@ public class FrameLayout implements ActionListener {
                 System.out.println("Du tryckte på reset knappen");
 
             }
-        });
+        },
 
 
         frame.revalidate();
