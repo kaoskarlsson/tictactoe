@@ -4,6 +4,7 @@ public class Main {
         FrameLayout framelayout = new FrameLayout();
         //en kommentar
         //En till kommentar
+        //En tredje kommentar
 
     }
 }
