@@ -1,5 +1,7 @@
+/*
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -262,15 +264,15 @@ public class FrameLayout implements ActionListener {
         }
         if(
                 (buttons[0].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[8].getText()=="O")
+                        (buttons[4].getText().equals("O")) &&
+                        (buttons[8].getText().equals("O"))
         ) {
             oWins(0,4,8);
         }
         if(
-                (buttons[2].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[6].getText()=="O")
+                (Objects.equals(buttons[2].getText(), "O")) &&
+                        (Objects.equals(buttons[4].getText(), "O")) &&
+                        (Objects.equals(buttons[6].getText(), "O"))
         ) {
             oWins(2,4,6);
         }
@@ -305,7 +307,7 @@ public class FrameLayout implements ActionListener {
 
                 System.out.println("Du tryckte på reset knappen");
 
-            }
+            });
         },
 
 
@@ -327,3 +329,4 @@ public class FrameLayout implements ActionListener {
 
 }
 
+*/
