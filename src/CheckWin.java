@@ -1,6 +1,3 @@
-// Lägg till dessa metoder i TicTacToeGame-klassen
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
@@ -11,7 +8,7 @@ import java.awt.event.ActionListener;
 public class CheckWin {
     private boolean checkWin(String symbol) {
         // Kolla rader
-        AbstractButton[] buttons;
+        AbstractButton[] buttons = new AbstractButton[0];
         for (int i = 0; i < 3; i++) {
             if (buttons[i * 3].getText().equals(symbol) &&
                     buttons[i * 3 + 1].getText().equals(symbol) &&
@@ -50,6 +47,7 @@ public class CheckWin {
     }
 
     private void highlightWinningCells(int cell1, int cell2, int cell3) {
+        Component[] buttons = new Component[0];
         buttons[cell1].setBackground(Color.GREEN);
         buttons[cell2].setBackground(Color.GREEN);
         buttons[cell3].setBackground(Color.GREEN);
@@ -58,6 +56,7 @@ public class CheckWin {
     }
 
     private void disableAllButtons() {
+        Iterable<? extends JButton> buttons = null;
         for (JButton button : buttons) {
             button.setEnabled(false);
         }
@@ -76,6 +75,9 @@ public class CheckWin {
                 checkTie();
             }
         }
+    }
+
+    private void makeMove(JButton clickedButton) {
     }
 
     private void checkTie() {

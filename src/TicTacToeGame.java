@@ -87,8 +87,4 @@ public class TicTacToeGame implements ActionListener {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(TicTacToeGame::new);
     }
-
-    public void initializeGame() {
-        // Här kan du lägga till logiken för att starta ett nytt spel
-    }
 }
