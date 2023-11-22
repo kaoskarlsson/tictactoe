@@ -3,7 +3,7 @@ import java.awt.*;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//HEEJEEJEJEJ
+
 public class FrameLayout implements ActionListener {
 
     Random random = new Random();
@@ -79,24 +79,69 @@ public class FrameLayout implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Du tryckte på one player knappen");
 
+                firstTurn();
             }
         });
         twoplayer_button.addActionListener(new ActionListener() {
             @Override
+
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Du tryckte på two player knappen");
+                for(int i=0;i<9;i++) {
+                    if(e.getSource()==buttons[i]) {
+                        if(player1_turn) {
+                            if(buttons[i].getText()=="") {
+                                buttons[i].setForeground(new Color(255,0,0));
+                                buttons[i].setText("X");
+                                player1_turn=false;
+                                textfield.setText("O turn");
+                                check();
+                            }
+                        }
+                        else {
+                            if(buttons[i].getText()=="") {
+                                buttons[i].setForeground(new Color(0,0,255));
+                                buttons[i].setText("O");
+                                player1_turn=true;
+                                textfield.setText("X turn");
+                                check();
+                            }
+                        }
+                    }
+                }
+            }
+
+            public void firstTurn() {
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+
+                if(random.nextInt(2)==0) {
+                    player1_turn=true;
+                    textfield.setText("X turn");
+                }
+                else {
+                    player1_turn=false;
+                    textfield.setText("O turn");
+                }
+            }
+
+            System.out.println("Du tryckte på two player knappen");
 
             }
         });
         reset_button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+
                 System.out.println("Du tryckte på reset knappen");
 
             }
         });
-
-
 
 
         frame.revalidate();
