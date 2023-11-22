@@ -76,6 +76,7 @@ public class TicTacToeGame implements ActionListener {
     private boolean checkWin(String symbol) {
         // Implementera logiken för att kontrollera om någon spelare har vunnit
         // ...
+        CheckWin checkWinner = new CheckWin();
         return false;
     }
 

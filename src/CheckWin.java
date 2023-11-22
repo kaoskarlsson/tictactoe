@@ -67,6 +67,7 @@ public class CheckWin {
         JButton clickedButton = (JButton) e.getSource();
         if (clickedButton.getText().isEmpty()) {
             makeMove(clickedButton);
+
             if (checkWin("X")) {
                 textfield.setText("X wins!");
             } else if (checkWin("O")) {
