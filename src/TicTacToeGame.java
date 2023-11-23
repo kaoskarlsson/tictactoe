@@ -61,6 +61,7 @@ TicTacToeGame(){
          buttons[i].setFocusable(false);
          buttons[i].addActionListener(this);
      }
+
     // Lägger till textfält i titel_panel och titel_panel i frame
      title_panel.add(textfield);
      frame.add(title_panel,BorderLayout.NORTH);
@@ -111,7 +112,6 @@ TicTacToeGame(){
                 }
             }
         }
-
 
 }
     // Metod för att kontrollera om någon har vunnit eller om det är oavgjort
@@ -267,8 +267,6 @@ TicTacToeGame(){
         JTextField textfield = new JTextField();
         
         // Kollar om det finns några tomma celler kvar
-        JButton[] buttons = new JButton[0];
-
         for (JButton button : buttons) {
             if (button.getText().isEmpty()) {
                 tie = false;

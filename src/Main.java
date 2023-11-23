@@ -1,16 +1,10 @@
+// Huvudklass där spelet startar
 public class Main {
+    // Huvudmetoden som körs när programmet startas
     public static void main(String[] args) {
-/*
-        FrameLayout framelayout = new FrameLayout();
-        //en kommentar
-        //En till kommentar
-        //En tredje kommentar*/
 
-
+        // Skapar en ny instans av TicTacToeGame som startar spelet
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
-       // ticTacToeGame.initializeGame();
-        //kommentar
-        //jag ser inga fel
 
     }
 }
