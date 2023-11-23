@@ -5,6 +5,5 @@ public class Main {
 
         // Skapar en ny instans av TicTacToeGame som startar spelet
         TicTacToeGame ticTacToeGame = new TicTacToeGame();
-
     }
 }
