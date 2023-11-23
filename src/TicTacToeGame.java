@@ -1,25 +1,39 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Random;
+import javax.swing.*; // Innehåller klasser och metoder för att skapa GUI-komponenter
+import java.awt.*;  // Innehåller klasser för GUI-komponenter och layouthantering
+import java.awt.event.ActionEvent; // Representerar en händelse som skapas när en användaråtgärd utförs
+import java.awt.event.ActionListener; // Ett gränssnitt för att lyssna på händelser av typen ActionEvent
+import java.util.Random; // Används för att generera slumpmässiga tal
 
+// Klassen TicTacToeGame implementerar ActionListener för att hantera händelser från buttons
 public class TicTacToeGame implements ActionListener {
 
+    // En instans av Random för att hantera slumpmässiga val
     Random random = new Random();
+    // Fönstret för spelet
     JFrame frame = new JFrame();
+    // Visar meddelanden och spelstatus
     JTextField textfield = new JTextField();
     JLabel label = new JLabel();
+    // JPanel för titeln
     JPanel title_panel = new JPanel();
+    // JPanel för spelknapparna
     JPanel button_panel = new JPanel();
     JPanel south_panel = new JPanel();
+
+
+    // Knappar för olika spelalternativ
     JButton oneplayer_button = new JButton();
     JButton twoplayer_button = new JButton();
     JButton reset_button = new JButton();
+
+    // Array för spelknapparna
     JButton[] buttons = new JButton[9];
+
+    // Variabel för att hålla reda på vilken spelares tur det är
     boolean player1_turn;
     boolean twoPlayer_Mode;
 
+    // Konstruktor för att initialisera och sätta upp spelet
     TicTacToeGame() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -27,6 +41,7 @@ public class TicTacToeGame implements ActionListener {
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
 
+        // Inställningar för textfält som visar meddelanden och spelstatus
         textfield.setBackground(Color.BLACK);
         textfield.setForeground(Color.CYAN);
         textfield.setFont(new Font("Monospaced", Font.PLAIN, 20));
