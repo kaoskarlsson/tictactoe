@@ -1,31 +1,44 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Random;
+import javax.swing.*; // Innehåller klasser och metoder för att skapa GUI-komponenter
+import java.awt.*;  // Innehåller klasser för GUI-komponenter och layouthantering
+import java.awt.event.ActionEvent;  // Representerar en händelse som skapas när en användaråtgärd utförs
+import java.awt.event.ActionListener;  // Ett gränssnitt för att lyssna på händelser av typen ActionEvent.
+import java.util.Random;  // Används för att generera slumpmässiga tal
 
+// Klassen TicTacToeGame implementerar ActionListener för att hantera händelser från buttons
 public class TicTacToeGame implements ActionListener {
 
+    // En instans av Random för att hantera slumpmässiga val
     Random random = new Random();
-    JFrame frame = new JFrame() ;
+    // Fönstret för spelet
+    JFrame frame = new JFrame();
+    // Visar meddelanden och spelstatus
     JTextField textfield = new JTextField();
     JLabel label = new JLabel();
+    // JPanel för titeln
     JPanel title_panel = new JPanel();
+    // JPanel för spelknapparna
     JPanel button_panel = new JPanel();
+
     JPanel south_panel = new JPanel();
+    // Knappar för olika spelalternativ
     JButton oneplayer_button = new JButton();
     JButton twoplayer_button = new JButton();
     JButton reset_button = new JButton();
+    // Array för spelknapparna
     JButton[] buttons = new JButton[9];
+    // Variabel för att hålla reda på vilken spelares tur det är
     boolean player1_turn;
+    boolean twoPlayer_Mode;
 
-TicTacToeGame(){
+    // Konstruktor för att initialisera och sätta upp spelet
+    TicTacToeGame() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
-        frame.getContentPane().setBackground(new Color(50,50,50));
+        frame.getContentPane().setBackground(new Color(50, 50, 50));
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
 
+        // Inställningar för textfält som visar meddelanden och spelstatus
         textfield.setBackground(Color.BLACK);
         textfield.setForeground(Color.CYAN);
         textfield.setFont(new Font("Monospaced", Font.PLAIN, 20));
@@ -33,224 +46,275 @@ TicTacToeGame(){
         textfield.setText("Tic-Tac-Toe");
         textfield.setOpaque(true);
 
-            title_panel.setLayout(new BorderLayout());
-            title_panel.setBounds(0,0,800,100);
+        // Inställningar för titel_panel
+        title_panel.setLayout(new BorderLayout());
+        title_panel.setBounds(0, 0, 800, 100);
 
-     button_panel.setLayout(new GridLayout(3,3));
-     button_panel.setBackground(new Color(150,150,150));
+        // Inställningar för title_panel
+        title_panel.setLayout(new BorderLayout());
+        title_panel.setPreferredSize(new Dimension(800, 50));
 
-     for(int i=0;i<9;i++) {
-         buttons[i] = new JButton();
-         button_panel.add(buttons[i]);
-         buttons[i].setFont(new Font("MV Boli",Font.BOLD,120));
-         buttons[i].setFocusable(false);
-         buttons[i].addActionListener(this);
-     }
+        button_panel.setLayout(new GridLayout(3, 3));
+        button_panel.setBackground(new Color(150, 150, 150));
 
-     title_panel.add(textfield);
-     frame.add(title_panel,BorderLayout.NORTH);
-     frame.add(button_panel);
+        disableAllButtons();
 
-     firstTurn();
- }
+        south_panel.setLayout(new FlowLayout());
+        south_panel.setPreferredSize(new Dimension(800, 50));
+        south_panel.setBackground(Color.BLACK);
 
-    private void firstTurn() {
-        if(random.nextInt(2)==0) {
-            player1_turn=true;
-            textfield.setText("X turn");
+        oneplayer_button.addActionListener(this);
+        twoplayer_button.addActionListener(this);
+        reset_button.addActionListener(this);
+
+        // Skapar och lägger till knappar i button_panel
+        for (int i = 0; i < 9; i++) {
+            buttons[i] = new JButton();
+            button_panel.add(buttons[i]);
+            buttons[i].setFont(new Font("MV Boli", Font.BOLD, 120));
+            buttons[i].setFocusable(false);
+            buttons[i].addActionListener(this);
         }
-        else {
-            player1_turn=false;
+
+        // Lägger till textfält i titel_panel och titel_panel i frame
+        //title_panel.add(textfield);//
+        //frame.add(title_panel,BorderLayout.NORTH);//
+        // Lägger till button_panel i frame
+        //frame.add(button_panel);//
+        //frame.add(south_panel, BorderLayout.SOUTH);//
+
+        frame.revalidate();
+        frame.repaint();
+
+        // Anropar firstTurn för att bestämma vilken spelare som börjar
+        //firstTurn();//
+
+    }
+
+    // Metoden för att bestämma vilken spelare som börjar spelet
+    private void firstTurn() {
+        // Random för att bestämma om det är X eller O som börjar
+        if (random.nextInt(2) == 0) {
+            player1_turn = true;
+            textfield.setText("X turn");
+        } else {
+            player1_turn = false;
             textfield.setText("O turn");
         }
     }
 
+    // Metoden som hanterar händelser från knapptryckningar
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Loopar igenom spelknapparna för att avgöra vilken knapp som tryckts
+        //for(int i=0;i<9;i++) {
 
-        for(int i=0;i<9;i++) {
-            if(e.getSource()==buttons[i]) {
-                if(player1_turn) {
-                    if(buttons[i].getText()=="") {
-                        buttons[i].setForeground(new Color(255,0,0));
+        // Hanterar knapptryckningen beroende på vilken spelare som är näst på tur
+        //if(e.getSource()==buttons[i]) {
+        //  if(player1_turn) {
+        //    if(buttons[i].getText()=="") {
+        //
+        //      buttons[i].setForeground(new Color(255,0,0));
+
+        if (e.getSource() == oneplayer_button) {
+            System.out.println("Du tryckte på 1 player knappen");
+            twoPlayer_Mode = false;
+            resetButtons();
+            // enableButtons();
+        } else if (e.getSource() == twoplayer_button) {
+            System.out.println("Du tryckte på 2 player knappen");
+            twoPlayer_Mode = true;
+            resetButtons();
+            //-------Add new first turn button here instead---------
+            firstTurn();
+        }
+        //----------Adds new reset button-----------
+        else if (e.getSource() == reset_button) {
+            System.out.println("Du tryckte på reset button");
+            resetButtons();
+            firstTurn();
+        }
+        for (int i = 0; i < 9; i++) {
+            if (e.getSource() == buttons[i]) {
+                if (player1_turn) {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
-                        player1_turn=false;
+
+                        player1_turn = false;
                         textfield.setText("O turn");
+                        // Kontrollerar om någon har vunnit eller om det är oavgjort
                         check();
+                        checkTie();
                     }
-                }
-                else {
-                    if(buttons[i].getText()=="") {
-                        buttons[i].setForeground(new Color(0,0,255));
+                } else {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setForeground(new Color(0, 0, 255));
                         buttons[i].setText("O");
-                        player1_turn=true;
+                        player1_turn = true;
                         textfield.setText("X turn");
+                        // Kontrollerar om någon har vunnit eller om det är oavgjort
                         check();
+                        checkTie();
                     }
                 }
             }
         }
-    //Infoga Try catch här? //
+    }
 
-
-}
-
+    // Metod för att kontrollera om någon har vunnit eller om det är oavgjort
     public void check() {
-        //check X win conditions
-        if(
-                (buttons[0].getText()=="X") &&
-                        (buttons[1].getText()=="X") &&
-                        (buttons[2].getText()=="X")
+        // Kontrollerar X-vinster i rader, kolumner och diagonaler
+        if (
+                (buttons[0].getText() == "X") &&
+                        (buttons[1].getText() == "X") &&
+                        (buttons[2].getText() == "X")
         ) {
-            xWins(0,1,2);
+            xWins(0, 1, 2);
         }
-        if(
-                (buttons[3].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[5].getText()=="X")
+        if (
+                (buttons[3].getText() == "X") &&
+                        (buttons[4].getText() == "X") &&
+                        (buttons[5].getText() == "X")
         ) {
-            xWins(3,4,5);
+            xWins(3, 4, 5);
         }
-        if(
-                (buttons[6].getText()=="X") &&
-                        (buttons[7].getText()=="X") &&
-                        (buttons[8].getText()=="X")
+        if (
+                (buttons[6].getText() == "X") &&
+                        (buttons[7].getText() == "X") &&
+                        (buttons[8].getText() == "X")
         ) {
-            xWins(6,7,8);
-        }
-
-
-
-
-        if(
-                (buttons[0].getText()=="X") &&
-                        (buttons[3].getText()=="X") &&
-                        (buttons[6].getText()=="X")
-        ) {
-            xWins(0,3,6);
-        }
-        if(
-                (buttons[1].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[7].getText()=="X")
-        ) {
-            xWins(1,4,7);
-        }
-        if(
-                (buttons[2].getText()=="X") &&
-                        (buttons[5].getText()=="X") &&
-                        (buttons[8].getText()=="X")
-        ) {
-            xWins(2,5,8);
-        }
-        if(
-                (buttons[0].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[8].getText()=="X")
-        ) {
-            xWins(0,4,8);
+            xWins(6, 7, 8);
         }
 
+        if (
+                (buttons[0].getText() == "X") &&
+                        (buttons[3].getText() == "X") &&
+                        (buttons[6].getText() == "X")
+        ) {
+            xWins(0, 3, 6);
+        }
+        if (
+                (buttons[1].getText() == "X") &&
+                        (buttons[4].getText() == "X") &&
+                        (buttons[7].getText() == "X")
+        ) {
+            xWins(1, 4, 7);
+        }
+        if (
+                (buttons[2].getText() == "X") &&
+                        (buttons[5].getText() == "X") &&
+                        (buttons[8].getText() == "X")
+        ) {
+            xWins(2, 5, 8);
+        }
+        if (
+                (buttons[0].getText() == "X") &&
+                        (buttons[4].getText() == "X") &&
+                        (buttons[8].getText() == "X")
+        ) {
+            xWins(0, 4, 8);
+        }
 
+        if (
+                (buttons[2].getText() == "X") &&
+                        (buttons[4].getText() == "X") &&
+                        (buttons[6].getText() == "X")
+        ) {
+            xWins(2, 4, 6);
+        }
 
-
-
-
-        if(
-                (buttons[2].getText()=="X") &&
-                        (buttons[4].getText()=="X") &&
-                        (buttons[6].getText()=="X")
+        // Kontrollerar O-vinster i rader, kolumner och diagonaler
+        if (
+                (buttons[0].getText() == "O") &&
+                        (buttons[1].getText() == "O") &&
+                        (buttons[2].getText() == "O")
         ) {
-            xWins(2,4,6);
+            oWins(0, 1, 2);
         }
-        //check O win conditions
-        if(
-                (buttons[0].getText()=="O") &&
-                        (buttons[1].getText()=="O") &&
-                        (buttons[2].getText()=="O")
+        if (
+                (buttons[3].getText() == "O") &&
+                        (buttons[4].getText() == "O") &&
+                        (buttons[5].getText() == "O")
         ) {
-            oWins(0,1,2);
+            oWins(3, 4, 5);
         }
-        if(
-                (buttons[3].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[5].getText()=="O")
+        if (
+                (buttons[6].getText() == "O") &&
+                        (buttons[7].getText() == "O") &&
+                        (buttons[8].getText() == "O")
         ) {
-            oWins(3,4,5);
+            oWins(6, 7, 8);
         }
-        if(
-                (buttons[6].getText()=="O") &&
-                        (buttons[7].getText()=="O") &&
-                        (buttons[8].getText()=="O")
+        if (
+                (buttons[0].getText() == "O") &&
+                        (buttons[3].getText() == "O") &&
+                        (buttons[6].getText() == "O")
         ) {
-            oWins(6,7,8);
+            oWins(0, 3, 6);
         }
-        if(
-                (buttons[0].getText()=="O") &&
-                        (buttons[3].getText()=="O") &&
-                        (buttons[6].getText()=="O")
+        if (
+                (buttons[1].getText() == "O") &&
+                        (buttons[4].getText() == "O") &&
+                        (buttons[7].getText() == "O")
         ) {
-            oWins(0,3,6);
+            oWins(1, 4, 7);
         }
-        if(
-                (buttons[1].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[7].getText()=="O")
+        if (
+                (buttons[2].getText() == "O") &&
+                        (buttons[5].getText() == "O") &&
+                        (buttons[8].getText() == "O")
         ) {
-            oWins(1,4,7);
+            oWins(2, 5, 8);
         }
-        if(
-                (buttons[2].getText()=="O") &&
-                        (buttons[5].getText()=="O") &&
-                        (buttons[8].getText()=="O")
+        if (
+                (buttons[0].getText() == "O") &&
+                        (buttons[4].getText() == "O") &&
+                        (buttons[8].getText() == "O")
         ) {
-            oWins(2,5,8);
+            oWins(0, 4, 8);
         }
-        if(
-                (buttons[0].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[8].getText()=="O")
+        if (
+                (buttons[2].getText() == "O") &&
+                        (buttons[4].getText() == "O") &&
+                        (buttons[6].getText() == "O")
         ) {
-            oWins(0,4,8);
-        }
-        if(
-                (buttons[2].getText()=="O") &&
-                        (buttons[4].getText()=="O") &&
-                        (buttons[6].getText()=="O")
-        ) {
-            oWins(2,4,6);
+            oWins(2, 4, 6);
         }
     }
 
-    public void xWins(int a,int b,int c) {
+    // Metoden som kallas när X vinner, markerar vinnande celler och inaktiverar knappar
+    public void xWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
         buttons[c].setBackground(Color.GREEN);
 
-        for(int i=0;i<9;i++) {
+        // Inaktiverar alla knappar
+        for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
+        // Visar meddelande att X har vunnit
         textfield.setText("X wins");
     }
-    public void oWins(int a,int b,int c) {
+
+    // Metoden som kallas när O vinner, markerar vinnande celler och inaktiverar knappar
+    public void oWins(int a, int b, int c) {
         buttons[a].setBackground(Color.GREEN);
         buttons[b].setBackground(Color.GREEN);
         buttons[c].setBackground(Color.GREEN);
 
-        for(int i=0;i<9;i++) {
+        // Inaktiverar alla knappar
+        for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
         textfield.setText("O wins");
     }
 
-
-
-
+    // Metoden för att kontrollera om det är oavgjort
     private void checkTie() {
         boolean tie = true;
 
-        // Kolla om det finns några tomma celler kvar
-        JButton[] buttons = new JButton[0];
+        // Kollar om det finns några tomma celler kvar
         for (JButton button : buttons) {
             if (button.getText().isEmpty()) {
                 tie = false;
@@ -258,17 +322,69 @@ TicTacToeGame(){
             }
         }
 
-        // Om ingen vunnit och inga tomma celler finns kvar, är det oavgjort
+        // Om ingen har vunnit och inga tomma celler finns kvar, är det oavgjort
         if (tie) {
             textfield.setText("It's a tie!");
+
+            for (int i = 0; i < 9; i++) {
+                buttons[i].setBackground(Color.RED);
+            }
+
             disableAllButtons();
         }
     }
 
+    // Metod för att inaktivera alla knappar
     private void disableAllButtons() {
         for (JButton button : buttons) {
             button.setEnabled(false);
         }
     }
+
+    public void resetButtons() {
+        for (int i = 0; i < 9; i++) {
+            buttons[i].setText("");
+            buttons[i].setBackground(Color.LIGHT_GRAY);
+            buttons[i].setEnabled(true);
+
+            // buttons[i].repaint();
+            //buttons[i].revalidate();
+        }
+        twoPlayer_Mode = false;
+        player1_turn = true;
+        textfield.setText("Game reset");
+
+        boolean twoPlayer_Mode = false;
+        player1_turn = true;
+        textfield.setText("Game reset");
+    }
 }
+    /*
+    public void one_player() {
+        for (int i = 0; i < 9; i++) {
+            //if (e.getSource() == buttons[i]) {
+            if (player1_turn) {
+                if (buttons[i].getText() == "") {
+                    buttons[i].setForeground(new Color(255, 0, 0));
+                    //random.nextInt(0,3);
+                    buttons[random.nextInt(0,9)].setText("X");
+                    player1_turn = false;
+                    textfield.setText("O turn");
+                    check();
+                    checkTie();
+                }
+            }
+                else {
+                    if (buttons[i].getText() == "") {
+                        buttons[i].setForeground(new Color(0, 0, 255));
+                        //random.nextInt(0,3);
+                        buttons[random.nextInt(0,9)].setText("O");
+                        player1_turn = true;
+                        textfield.setText("X turn");
+                        check();
+                        checkTie();
+                    }
+                    */
+
+
 
