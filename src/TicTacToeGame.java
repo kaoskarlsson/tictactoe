@@ -87,6 +87,7 @@ public class TicTacToeGame implements ActionListener {
         if (twoPlayer_Mode==false){
             player1_turn = true;
             textfield.setText("X turn");
+
         } else if (twoPlayer_Mode==true) {
             if (random.nextInt(2) == 0) {
                 player1_turn = true;
@@ -108,7 +109,7 @@ public class TicTacToeGame implements ActionListener {
             twoPlayer_Mode = false;
 
             one_player();
-            disableAllButtons();
+
 
            // resetButtons();
             // enableButtons();
@@ -375,7 +376,7 @@ public class TicTacToeGame implements ActionListener {
 
             if (!player1_turn && buttons[i].getText().equals("")) {
 
-                buttons[i].setText("O");
+                //buttons[i].setText("O");
                 player1_turn = true;
                 textfield.setText("X turn");
                 check();
