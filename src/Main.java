@@ -1,4 +1,4 @@
-// Huvudklass där spelet startar
+// Huvudklass där spelet startar hehehehehe
 public class Main {
     // Huvudmetoden som körs när programmet startas
     public static void main(String[] args) {
