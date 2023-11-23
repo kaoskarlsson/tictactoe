@@ -112,7 +112,7 @@ public class TicTacToeGame implements ActionListener {
             twoPlayer_Mode =false;
             firstTurn();
             one_player();
-            disableAllButtons();
+            //disableAllButtons();
            // resetButtons();
             // enableButtons();
         } else if (e.getSource() == twoplayer_button) {
