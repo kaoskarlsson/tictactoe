@@ -85,9 +85,13 @@ public class TicTacToeGame implements ActionListener {
 
     private void firstTurn() {
         if (twoPlayer_Mode==false){
+            //one_player();
             player1_turn = true;
             textfield.setText("X turn");
-        } else if (twoPlayer_Mode==true) {
+
+
+        }
+         if (twoPlayer_Mode==true) {
             if (random.nextInt(2) == 0) {
                 player1_turn = true;
                 textfield.setText("X turn");
@@ -105,8 +109,10 @@ public class TicTacToeGame implements ActionListener {
         if (e.getSource() == oneplayer_button) {
 
             System.out.println("Du tryckte på 1 player knappen");
-            twoPlayer_Mode = false;
+            twoPlayer_Mode =false;
+            firstTurn();
             one_player();
+            disableAllButtons();
            // resetButtons();
             // enableButtons();
         } else if (e.getSource() == twoplayer_button) {
@@ -351,11 +357,13 @@ public class TicTacToeGame implements ActionListener {
     }
 
     public void one_player() {
+
         for (int i = 0; i < 9; i++) {
+            buttons[i].setEnabled(true);
             //if (e.getSource() == buttons[i]) {
-                if (player1_turn) {
+                while (player1_turn&&twoPlayer_Mode==false) {
                     if (buttons[i].getText() == "") {
-                        buttons[i].setForeground(new Color(255, 0, 0));
+                        buttons[i].setForeground(new Color(000, 0, 0));
                         //random.nextInt(0,3);
                         buttons[random.nextInt(0,9)].setText("X");
                         player1_turn = false;
@@ -363,6 +371,14 @@ public class TicTacToeGame implements ActionListener {
                         check();
                         checkTie();
 
+                        break;
+                    }
+                    while(buttons[i].getText() == "X"||buttons[i].getText() == "0"){
+                        buttons[random.nextInt(0,9)].setText("X");
+                        player1_turn = false;
+                        textfield.setText("O turn");
+                        check();
+                        checkTie();
                     }
                 }
                 /*else {
