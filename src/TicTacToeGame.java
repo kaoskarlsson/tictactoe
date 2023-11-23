@@ -121,7 +121,10 @@ public class TicTacToeGame implements ActionListener {
 
             System.out.println("Du tryckte på 1 player knappen");
             twoPlayer_Mode = false;
+
             one_player();
+            disableAllButtons();
+
            // resetButtons();
             // enableButtons();
         } else if (e.getSource() == twoplayer_button) {
@@ -312,12 +315,14 @@ public class TicTacToeGame implements ActionListener {
 
 
     private void checkTie() {
+
         boolean tie = true;
 
         // Kolla om det finns några tomma celler kvar
 
         // JButton[] buttons = new JButton[0];
         for (JButton button : buttons) {
+
             if (button.getText().isEmpty()) {
                 tie = false;
                 break;
@@ -326,6 +331,7 @@ public class TicTacToeGame implements ActionListener {
 
         // Om ingen vunnit och inga tomma celler finns kvar, är det oavgjort
         if (tie) {
+
             textfield.setText("It's a tie!");
             //--------Set background color red if tie------
             for (int i = 0; i < 9; i++) {
@@ -367,33 +373,36 @@ public class TicTacToeGame implements ActionListener {
 
     public void one_player() {
         for (int i = 0; i < 9; i++) {
-            //if (e.getSource() == buttons[i]) {
-                if (player1_turn) {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setForeground(new Color(255, 0, 0));
-                        //random.nextInt(0,3);
-                        buttons[random.nextInt(0, 9)].setText("X");
-                        player1_turn = false;
-                        textfield.setText("O turn");
-                        check();
-                        checkTie();
 
-                    }
+            if (player1_turn) {
+                if (buttons[i].getText().equals("")) {
+                    buttons[i].setForeground(new Color(255, 0, 0));
+                    buttons[i].setText("X");
+                    player1_turn = false;
+                    textfield.setText("O turn");
+                    check();
+                    checkTie();
+
+                    break;
                 }
-                /*else {
-                    if (buttons[i].getText() == "") {
-                        buttons[i].setForeground(new Color(0, 0, 255));
-                        //random.nextInt(0,3);
-                        buttons[random.nextInt(0,9)].setText("O");
-                        player1_turn = true;
-                        textfield.setText("X turn");
-                        check();
-                        checkTie();
-                    }
-                }*/
+            }
 
+
+            if (!player1_turn && buttons[i].getText().equals("")) {
+
+                buttons[i].setText("O");
+                player1_turn = true;
+                textfield.setText("X turn");
+                check();
+                checkTie();
+                break;
             }
         }
     }
+
+}
+
+
+
 
 
