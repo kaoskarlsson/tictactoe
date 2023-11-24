@@ -1,3 +1,5 @@
 # tictactoe
 grupp 0
-**Credits:Alexandra,Oskar, Neil**
+**Credits:-Alexandra
+-Oskar 
+-Neil**
