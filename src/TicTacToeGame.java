@@ -114,8 +114,8 @@ public class TicTacToeGame implements ActionListener {
 
         // Repaintar fönstret för att visa eventuella ändringar
         frame.repaint();
-
     }
+
     // Metoden för att bestämma vilken spelare som börjar spelet
     private void firstTurn() {
         if (twoPlayer_Mode==false){
