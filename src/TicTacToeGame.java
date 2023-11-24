@@ -147,7 +147,7 @@ public class TicTacToeGame implements ActionListener {
             twoPlayer_Mode = false;
 
             one_player();
-            disableAllButtons();
+            //disableAllButtons();
 
         } else if (e.getSource() == twoplayer_button) {
 
