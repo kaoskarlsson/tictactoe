@@ -108,6 +108,9 @@ public class TicTacToeGame implements ActionListener {
 
         // Inaktiverar alla spelknappar
         disableAllButtons();
+        //resetButtons();
+        firstTurn();
+
 
         // Uppdaterar layouten för att säkerställa att alla komponenter placeras korrekt
         frame.revalidate();
@@ -122,7 +125,10 @@ public class TicTacToeGame implements ActionListener {
             // Enspelarläge: spelare 1 (X) börjar
             player1_turn = true;
             textfield.setText("X turn");
-        } else if (twoPlayer_Mode==true) {
+            System.out.println("first: "+textfield.getText());
+
+        } else  {
+            System.out.println("före: "+textfield.getText());
             // Tvåspelarläge: slumpar fram vilken spelare som börjar
             if (random.nextInt(2) == 0) {
                 player1_turn = true;
@@ -131,6 +137,8 @@ public class TicTacToeGame implements ActionListener {
                 player1_turn = false;
                 textfield.setText("O turn");
             }
+            System.out.println("efter: "+ textfield.getText());
+
         }
 
     }
@@ -142,20 +150,27 @@ public class TicTacToeGame implements ActionListener {
 
         // Hanterar knapptryckningen beroende på vilken spelare som är näst på tur
         if (e.getSource() == oneplayer_button) {
+            //resetButtons();
 
             System.out.println("Du tryckte på 1 player knappen");
             twoPlayer_Mode = false;
 
             one_player();
+
+            enableAllButtons();
+
+           // player1_turn=false;
+           // textfield.setText("O turn");
+
             //disableAllButtons();
 
         } else if (e.getSource() == twoplayer_button) {
+            enableAllButtons();
 
             System.out.println("Du tryckte på 2 player knappen");
             twoPlayer_Mode = true;
-            resetButtons();
-
-            firstTurn();
+            //resetButtons();
+            //firstTurn();
         }
 
         else if (e.getSource() == reset_button) {
@@ -167,6 +182,30 @@ public class TicTacToeGame implements ActionListener {
         // Hanterar spelarinteraktion på spelbrädet
         for (int i = 0; i < 9; i++) {
             if (e.getSource() == buttons[i]) {
+
+                if(!twoPlayer_Mode){ //AI mode
+                    //while( !checkIfAllIsOccupied())
+                        if(player1_turn){ //player turn
+                            if (buttons[i].getText() == "") {
+                                buttons[i].setForeground(new Color(255, 0, 0));
+                                buttons[i].setText("O");
+                                player1_turn = false;
+                                textfield.setText("X turn");
+                                checkTie();
+                                check();
+                                buttons[i].doClick();
+
+                            }
+                        }else{ // AIturn
+                            randomIndex();
+                            player1_turn=true;
+                            textfield.setText("O turn");
+
+                            checkTie();
+                            check();
+                        }
+
+                }else{
                 if (player1_turn) {
                     if (buttons[i].getText() == "") {
                         buttons[i].setForeground(new Color(255, 0, 0));
@@ -186,7 +225,7 @@ public class TicTacToeGame implements ActionListener {
                         checkTie();
                         check();
                     }
-                }
+                }}
             }
         }
     }
@@ -374,6 +413,12 @@ public class TicTacToeGame implements ActionListener {
         }
     }
 
+    private void enableAllButtons() {
+        for (JButton button : buttons) {
+            button.setEnabled(true);
+        }
+    }
+
 
     // Återställer alla spelknappar till startläget
     public void resetButtons() {
@@ -394,17 +439,27 @@ public class TicTacToeGame implements ActionListener {
         textfield.setText("Game reset");
     }
 
+    boolean checkIfAllIsOccupied(){
+        int i=0;
+        for (JButton b:buttons)
+            if(!b.getText().isEmpty()) i++;
+        return i == 9;
+    }
+
+
     // Metoden för att hantera läget för one_player
     public void one_player() {
         for (int i = 0; i < 9; i++) {
 
             // Kontrollerar om det är spelarens X tur
-            if (player1_turn) {
+            while (player1_turn){
                 // Kontrollerar om cellen är tom
-                if (buttons[i].getText().equals("")) {
+                if (buttons[i].getText().isEmpty()) {
+
                     // Sätter X i den valda cellen
-                    buttons[i].setForeground(Color.red);
-                    buttons[i].setText("X");
+                    randomIndex();
+                    //buttons[i].setForeground(Color.red);
+                    //buttons[i].setText("X");
                     // Byter tur till spelare O
                     player1_turn = false;
                     // Uppdaterar meddelandetexten för nästa tur
@@ -418,9 +473,9 @@ public class TicTacToeGame implements ActionListener {
                 }
             }
 
-            if (!player1_turn && buttons[i].getText().equals("")) {
+            if (!player1_turn && buttons[i].getText().isEmpty()) {
                 // Sätter O i den valda cellen
-                buttons[i].setText("O");
+               // buttons[i].setText("O");
                 // Byter tur till spelare X
                 player1_turn = true;
                 // Uppdaterar meddelandetexten för nästa tur
@@ -434,4 +489,22 @@ public class TicTacToeGame implements ActionListener {
             }
         }
     }
+    public void randomIndex(){
+//for(int i =0; i < 9; i++) {
+    int rand = random.nextInt(0, 9);
+    System.out.flush();
+        System.out.println(rand);
+    while(!buttons[rand].getText().isEmpty())
+    {
+        rand = random.nextInt(0, 9);
+        System.out.println(rand);
+
+    }
+
+    buttons[rand].setForeground(Color.red);
+    buttons[rand].setText("X");
+
+
+    }
+
 }
