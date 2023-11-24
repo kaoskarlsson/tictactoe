@@ -173,8 +173,9 @@ public class TicTacToeGame implements ActionListener {
                         buttons[i].setText("X");
                         player1_turn = false;
                         textfield.setText("O turn");
-                        check();
                         checkTie();
+                        check();
+
                     }
                 } else {
                     if (buttons[i].getText() == "") {
@@ -182,8 +183,8 @@ public class TicTacToeGame implements ActionListener {
                         buttons[i].setText("O");
                         player1_turn = true;
                         textfield.setText("X turn");
-                        check();
                         checkTie();
+                        check();
                     }
                 }
             }
@@ -402,7 +403,7 @@ public class TicTacToeGame implements ActionListener {
                 // Kontrollerar om cellen är tom
                 if (buttons[i].getText().equals("")) {
                     // Sätter X i den valda cellen
-                    buttons[i].setForeground(new Color(255, 0, 0));
+                    buttons[i].setForeground(Color.red);
                     buttons[i].setText("X");
                     // Byter tur till spelare O
                     player1_turn = false;
